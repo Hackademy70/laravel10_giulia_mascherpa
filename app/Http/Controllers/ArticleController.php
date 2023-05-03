@@ -15,4 +15,12 @@ class ArticleController extends Controller
         $articles = Article::all();
         return view('articles.index', compact('articles'));
     }
+
+    public function edit(Article $article){
+        return view('articles.edit', compact('article'));
+    }
+
+    public function show(Article $article){
+        return view('articles.show', compact('article'));
+    }
 }

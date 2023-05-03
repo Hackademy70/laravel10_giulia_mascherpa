@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends Model
 {
@@ -14,4 +15,19 @@ class Article extends Model
         'subtitle',
         'body',
     ];
+
+    public function tags() {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function getFormattedTags()
+    {
+        $formattedTags = '';
+        
+        foreach($this->tags as $tag) {
+            $formattedTags .= '<li class="list-group-item">'.$tag->name.'</li>';
+        }
+
+        return $formattedTags;
+    }
 }

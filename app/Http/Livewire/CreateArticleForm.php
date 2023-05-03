@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Tag;
 use App\Models\Article;
 use Livewire\Component;
 
@@ -11,6 +12,7 @@ class CreateArticleForm extends Component
     public $title;
     public $subtitle;
     public $body;
+    public $tags;
 
     protected $rules = [
         'title'=>'required|min:6|max:100', 
@@ -27,16 +29,19 @@ class CreateArticleForm extends Component
     public function store(){
         $this->validate();
 
-        Article::create([
+        $article = Article::create([
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'body' => $this->body,
         ]);
 
+        $article->tags()->attach($this->tags);
+
         $this->reset(); 
     }
 
     public function render(){
-        return view('livewire.create-article-form');
+        $tagsAll = Tag::all();
+        return view('livewire.create-article-form', compact('tagsAll'));
     }
 }
