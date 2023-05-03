@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-12">
-                <h1>Crea Articolo</h1>
+                <h1>Modifica Articolo: {{ $article->title }}</h1>
             </div>
         </div>
     </div>
@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-12">
-               <livewire:create-article-form />
+                <livewire:edit-article-form :article="$article"/>
             </div>
         </div>
     </div>
